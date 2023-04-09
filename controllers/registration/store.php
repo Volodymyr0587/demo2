@@ -43,7 +43,7 @@ if ($user) {
     ]);
 
     login([
-        'email' => $email
+        'email' => $email,
     ]);
 
     header('location: /');

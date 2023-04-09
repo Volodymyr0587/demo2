@@ -5,14 +5,18 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 22;
-
+//$currentUserId = 23;
+if (isset($_SESSION['user']['id'])) {
+    $user_id = $_SESSION['user']['id'];
+} else {
+    $user_id = 0;
+}
 
 $note = $db->query('select * from notes where id = :id', [
     'id' => $_GET['id']
 ])->findOrFail();
 
-authorize($note['user_id'] === $currentUserId);
+authorize($note['user_id'] === $user_id);
 
 
 view("notes/show.view.php", [

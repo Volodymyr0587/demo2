@@ -20,11 +20,17 @@ if (! empty($errors)) {
     ]);
 }
 
-
+if (isset($_SESSION['user']['id'])) {
+    $user_id = $_SESSION['user']['id'];
+} else {
+    $user_id = 0;
+}
 $db->query('INSERT INTO notes(body, user_id) VALUES(:body, :user_id)', [
     'body' => $_POST['body'],
-    'user_id' => 22
+    'user_id' => $user_id
 ]);
+
+
 
 header('location: /notes');
 die();
